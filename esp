@@ -545,14 +545,14 @@ local EspInterface = {
 	},
 	teamSettings = {
 		enemy = {
-			enabled = true,
-			box = true,
+			enabled = false,
+			box = false,
 			boxColor = { Color3.new(1,0,0), 1 },
 			boxOutline = true,
 			boxOutlineColor = { Color3.new(), 1 },
 			boxFill = false,
 			boxFillColor = { Color3.new(1,0,0), 0.5 },
-			healthBar = true,
+			healthBar = false,
 			healthyColor = Color3.new(0,1,0),
 			dyingColor = Color3.new(1,0,0),
 			healthBarOutline = true,
@@ -561,9 +561,9 @@ local EspInterface = {
 			healthTextColor = { Color3.new(1,1,1), 1 },
 			healthTextOutline = true,
 			healthTextOutlineColor = Color3.new(),
-			box3d = true,
+			box3d = false,
 			box3dColor = { Color3.new(1,0,0), 1 },
-			name = true,
+			name = false,
 			nameColor = { Color3.new(1,1,1), 1 },
 			nameOutline = true,
 			nameOutlineColor = Color3.new(),
@@ -592,14 +592,14 @@ local EspInterface = {
 			chamsOutlineColor = { Color3.new(1,0,0), 0 },
 		},
 		friendly = {
-			enabled = true,
-			box = true,
+			enabled = false,
+			box = false,
 			boxColor = { Color3.new(0,1,0), 1 },
 			boxOutline = true,
 			boxOutlineColor = { Color3.new(), 1 },
 			boxFill = false,
 			boxFillColor = { Color3.new(0,1,0), 0.5 },
-			healthBar = true,
+			healthBar = false,
 			healthyColor = Color3.new(0,1,0),
 			dyingColor = Color3.new(1,0,0),
 			healthBarOutline = true,
@@ -608,9 +608,9 @@ local EspInterface = {
 			healthTextColor = { Color3.new(1,1,1), 1 },
 			healthTextOutline = true,
 			healthTextOutlineColor = Color3.new(),
-			box3d = true,
+			box3d = false,
 			box3dColor = { Color3.new(0,1,0), 1 },
-			name = true,
+			name = false,
 			nameColor = { Color3.new(1,1,1), 1 },
 			nameOutline = true,
 			nameOutlineColor = Color3.new(),
@@ -710,7 +710,12 @@ function EspInterface.getTeamColor(player)
 end
 
 function EspInterface.getCharacter(player)
-	return player.Character;
+    for _, v in pairs(workspace:GetChildren()) do
+        if v.Name == "soldier_model" and v:FindFirstChild("HumanoidRootPart") then
+            return v
+        end
+    end
+    return nil
 end
 
 function EspInterface.getHealth(player)
